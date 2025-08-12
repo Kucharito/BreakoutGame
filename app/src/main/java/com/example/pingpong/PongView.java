@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class PongView extends SurfaceView implements Runnable {
     private Thread gameThread;
     boolean isPlaying;
@@ -17,6 +19,7 @@ public class PongView extends SurfaceView implements Runnable {
     private Ball ball;
     private int score =0;
     private int level = 1;
+    ArrayList<Brick> bricks;
 
     public PongView(Context context) {
         // Initialize the PongView, SurfaceHolder, Paint, etc.
@@ -58,6 +61,17 @@ public class PongView extends SurfaceView implements Runnable {
             score = 0; // Reset score on miss
             level = 1; // Reset level on miss
         }
+        // Check for collisions with bricks
+        if (bricks != null){
+            for (Brick brick : bricks){
+                if(brick.isVisible() && ball.getRect().intersect(brick.getRectF())){
+                    brick.setInvisible();
+                    ball.reverseY();
+                    score = score + 10;
+                    break;
+                }
+            }
+        }
     }
 
     private void draw(){
@@ -72,6 +86,14 @@ public class PongView extends SurfaceView implements Runnable {
             }
             if( ball != null) {
                 ball.draw(canvas, paint);
+            }
+            if(bricks != null){
+                paint.setColor(Color.GREEN);
+                for (Brick brick : bricks) {
+                    if (brick.isVisible()) {
+                        brick.draw(canvas, paint);
+                    }
+                }
             }
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -118,6 +140,23 @@ public class PongView extends SurfaceView implements Runnable {
         }
         if( ball == null) {
             ball = new Ball(w, h);
+        }
+        if(bricks == null){
+            bricks = new ArrayList<>();
+            int rows = 5;
+            int cols = 8;
+            float brickWidth = w / cols;
+            float brickHeight = 50;
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
+                    bricks.add(new Brick(
+                            col * brickWidth + 5,
+                            row * (brickHeight + 10), // 10 is the gap between bricks
+                            brickHeight - 10,
+                            brickWidth - 5
+                    ));
+                }
+            }
         }
     }
 }
