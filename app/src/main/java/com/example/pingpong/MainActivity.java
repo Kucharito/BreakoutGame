@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         pongView = new PongView(this);
         setContentView(pongView);
+
     }
 
     @Override

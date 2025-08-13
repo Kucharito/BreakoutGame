@@ -1,6 +1,7 @@
 package com.example.pingpong;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -120,14 +121,26 @@ public class PongView extends SurfaceView implements Runnable {
             paint.setColor(Color.WHITE);
             paint.setTextSize(50);
             canvas.drawText("Score "+ score + "Level :"+ level,50,50, paint);
+
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences(OptionsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+            String paddleColor = sharedPreferences.getString(OptionsActivity.PADDLE_COLOR_KEY, "white");
+            String brickColor = sharedPreferences.getString(OptionsActivity.BRICK_COLOR_KEY, "white");
+            String ballColor = sharedPreferences.getString(OptionsActivity.BALL_COLOR_KEY, "white");
+
             if( paddle != null) {
+                paint.setColor(paddleColor.equals("red") ? Color.RED :
+                        paddleColor.equals("green") ? Color.GREEN :
+                        paddleColor.equals("blue") ? Color.BLUE : Color.WHITE);
                 paddle.draw(canvas, paint);
             }
             if( ball != null) {
+                paint.setColor(ballColor.equals("red") ? Color.RED :
+                        ballColor.equals("white") ? Color.WHITE : Color.GRAY);
                 ball.draw(canvas, paint);
             }
             if(bricks != null){
-                paint.setColor(Color.GREEN);
+                paint.setColor(brickColor.equals("red") ? Color.RED :
+                        brickColor.equals("white") ? Color.WHITE : Color.GRAY);
                 for (Brick brick : bricks) {
                     if (brick.isVisible()) {
                         brick.draw(canvas, paint);
@@ -140,7 +153,7 @@ public class PongView extends SurfaceView implements Runnable {
 
     private void control() {
         try {
-            Thread.sleep(17); // Roughly 60 FPS
+            Thread.sleep(17);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

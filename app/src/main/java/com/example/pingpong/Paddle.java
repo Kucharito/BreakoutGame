@@ -19,9 +19,9 @@ public class Paddle {
         height = 30;
 
         float left = (screenX / 2) - (width / 2);
-        float top = screenY - height - 50; // opravené
+        float top = screenY - height - 50;
         float right = (screenX / 2) + (width / 2);
-        float bottom = screenY - 50; // opravené
+        float bottom = screenY - 50;
         rectF = new RectF(left, top, right, bottom);
     }
 

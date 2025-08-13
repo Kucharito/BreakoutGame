@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">PingPong</string>
+    <string name="info_text">
+        🎮 Breakout – Herný návod\n\n
+        Cieľ hry:\n
+        Odrážaj loptičku pálkou a znič všetky tehličky na obrazovke.
+        Postupne prechádzaj levelmi a získavaj čo najviac bodov.\n\n
+        Ovládanie:\n
+        - Pohyb pálky: potiahni prstom po obrazovke doľava alebo doprava.\n\n
+        Pravidlá:\n
+        - Za zničenie jednej tehličky získavaš 10 bodov.\n
+        - Po odstránení všetkých tehličiek sa posúvaš na ďalší level.\n
+        - Loptička zrýchľuje po niekoľkých odrazoch.\n
+        - Ak loptička spadne dole, strácaš život a rýchlosť loptičky sa zníži.\n\n
+        Tipy:\n
+        - Snaž sa trafiť loptičku rôznymi časťami pálky – môžeš tak zmeniť jej smer.\n
+        - Rýchlejšia loptička ti prinesie viac bodov za menej času, ale je ťažšie ju zachytiť.
+    </string>
 </resources>
