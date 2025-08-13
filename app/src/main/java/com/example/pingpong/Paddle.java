@@ -15,8 +15,8 @@ public class Paddle {
         this.screenX = screenX;
         this.screenY = screenY;
 
-        width = 200;
-        height = 20;
+        width = 250;
+        height = 30;
 
         float left = (screenX / 2) - (width / 2);
         float top = screenY - height - 50; // opravené
