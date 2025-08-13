@@ -81,4 +81,9 @@ public class Ball {
         return ballSize;
     }
 
+    public void setSpeedBall(float speedX, float speedY){
+        xVelocity = speedX;
+        yVelocity = speedY;
+    }
+
 }

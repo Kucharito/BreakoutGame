@@ -40,20 +40,15 @@ public class PongView extends SurfaceView implements Runnable {
     }
     private void update() {
         if(ball == null || paddle == null) {
-            return;
+            return; // Ensure paddle and ball are initialized
         }
         ball.update();
-
         if(ball.getRect().intersect(paddle.getRectF())) {
             ball.reverseY();
             float ballSize = ball.getBallSize();
             ball.setPosition(ball.getRect().left,paddle.getRectF().top - ballSize);
             score++;
             ball.increaseSpeed();
-            if (score % 5 == 0) { // Increase level every 5 points
-                level++;
-                //ball.increaseSpeed();
-            }
 
         }
         if (ball.getY() > getHeight()) {
@@ -61,6 +56,7 @@ public class PongView extends SurfaceView implements Runnable {
             ball.resetPosition();
             score = 0; // Reset score on miss
             level = 1; // Reset level on miss
+            generateBricks(8 * level, getWidth()); // Regenerate bricks for new level
         }
         // Check for collisions with bricks
         if (bricks != null){
@@ -99,6 +95,22 @@ public class PongView extends SurfaceView implements Runnable {
                 }
             }
         }
+        if (bricks != null && allBricksDestroyed()){
+            level++;
+            float baseSpeed = 1.1f + (level -1)* 0.4f;
+            ball.setSpeedBall(baseSpeed*8, -baseSpeed*10);
+            generateBricks(5 * level, getWidth()); // Increase number of bricks with level
+        }
+    }
+
+    private boolean allBricksDestroyed()
+    {
+        for (Brick brick : bricks) {
+            if (brick.isVisible()) {
+                return false; // At least one brick is still visible
+            }
+        }
+        return true;
     }
 
     private void draw(){
@@ -149,6 +161,25 @@ public class PongView extends SurfaceView implements Runnable {
         gameThread.start();
     }
 
+    private void generateBricks(int count, int screenW){
+        bricks.clear();
+        float brickHeight = 50;
+        float verticalOffset = 100;
+        //float horizontalOffset = getWidth()/2;
+        float brickWidth = screenW / 8;
+
+        int bricksPreRow = (int)(screenW / brickWidth);
+        int created = 0;
+        for (int row = 0; row < count; row++) {
+            for (int col = 0; col < bricksPreRow && created < count; col++) {
+                float left = col * brickWidth + 5; //+ horizontalOffset;
+                float top = row * (brickHeight + 10) + verticalOffset;
+                bricks.add(new Brick(left, top, brickHeight - 10, brickWidth - 5));
+                created++;
+            }
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Handle touch events to move the paddle
@@ -161,30 +192,15 @@ public class PongView extends SurfaceView implements Runnable {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        // Initialize paddle with new dimensions
         if (paddle == null) {
             paddle = new Paddle(w, h);
         }
         if( ball == null) {
             ball = new Ball(w, h);
         }
-        if(bricks == null){
+        if(bricks == null) {
             bricks = new ArrayList<>();
-            int rows = 5;
-            int cols = 8;
-            float brickWidth = w / cols;
-            float brickHeight = 50;
-            float verticalOffset = 100; // Offset from the top of the screen
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    bricks.add(new Brick(
-                            col * brickWidth + 5,
-                            row * (brickHeight + 10)+verticalOffset,
-                            brickHeight - 10,
-                            brickWidth - 5
-                    ));
-                }
-            }
+            generateBricks(8, w);
         }
     }
 }
