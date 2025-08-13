@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -39,9 +40,10 @@ public class PongView extends SurfaceView implements Runnable {
     }
     private void update() {
         if(ball == null || paddle == null) {
-            return; // Ensure paddle and ball are initialized
+            return;
         }
         ball.update();
+
         if(ball.getRect().intersect(paddle.getRectF())) {
             ball.reverseY();
             float ballSize = ball.getBallSize();
@@ -51,7 +53,6 @@ public class PongView extends SurfaceView implements Runnable {
             if (score % 5 == 0) { // Increase level every 5 points
                 level++;
                 //ball.increaseSpeed();
-                // You can add logic to increase difficulty here
             }
 
         }
@@ -66,8 +67,34 @@ public class PongView extends SurfaceView implements Runnable {
             for (Brick brick : bricks){
                 if(brick.isVisible() && ball.getRect().intersect(brick.getRectF())){
                     brick.setInvisible();
-                    ball.reverseY();
-                    score = score + 10;
+                    RectF ballRect = ball.getRect();
+                    RectF brickRect = brick.getRectF();
+
+                    float overlapLeft = ballRect.right - brickRect.left;
+                    float overlapRight = brickRect.right - ballRect.left;
+                    float overlapTop = ballRect.bottom - brickRect.top;
+                    float overlapBottom = brickRect.bottom - ballRect.top;
+
+                    if (overlapLeft < overlapRight && overlapLeft < overlapTop && overlapLeft < overlapBottom) {
+                        // Ball hit the left side of the brick
+                        ball.reverseX();
+                        ball.setPosition(brickRect.left - ball.getBallSize(), ballRect.top);
+                    } else if (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom) {
+                        // Ball hit the right side of the brick
+                        ball.reverseX();
+                        ball.setPosition(brickRect.right, ballRect.top);
+                    } else if (overlapTop < overlapLeft && overlapTop < overlapRight && overlapTop < overlapBottom) {
+                        // Ball hit the top side of the brick
+                        ball.reverseY();
+                        ball.setPosition(ballRect.left, brickRect.top - ball.getBallSize());
+                    } else {
+                        // Ball hit the bottom side of the brick
+                        ball.reverseY();
+                        ball.setPosition(ballRect.left, brickRect.bottom);
+                    }
+                    // Increase score for hitting a brick
+
+                    score = score +10;
                     break;
                 }
             }
@@ -147,11 +174,12 @@ public class PongView extends SurfaceView implements Runnable {
             int cols = 8;
             float brickWidth = w / cols;
             float brickHeight = 50;
+            float verticalOffset = 100; // Offset from the top of the screen
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < cols; col++) {
                     bricks.add(new Brick(
                             col * brickWidth + 5,
-                            row * (brickHeight + 10), // 10 is the gap between bricks
+                            row * (brickHeight + 10)+verticalOffset,
                             brickHeight - 10,
                             brickWidth - 5
                     ));

@@ -40,6 +40,10 @@ public class Ball {
         yVelocity = -yVelocity;
     }
 
+    public void reverseX(){
+        xVelocity = -xVelocity;
+    }
+
     public void increaseSpeed(){
         xVelocity *= 1.1f;
         yVelocity *= 1.1f;
