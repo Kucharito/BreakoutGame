@@ -264,7 +264,7 @@ public class PongView extends SurfaceView implements Runnable {
                     ((MainActivity)getContext()).finish(); // Return to main menu
                 }
                 else if (exitButton.contains(x, y)) {
-                    ((MainMenuActivity)getContext()).finish(); // Exit the game
+                    ((MainActivity)getContext()).finishAffinity(); // Exit the game
                 }
                 return true;
             }
