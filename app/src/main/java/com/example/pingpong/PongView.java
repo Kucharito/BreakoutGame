@@ -269,7 +269,7 @@ public class PongView extends SurfaceView implements Runnable {
                 return true;
             }
         }
-        if(!isPaused && event.getAction() == MotionEvent.ACTION_DOWN) {
+        if(!isPaused && event.getAction() == MotionEvent.ACTION_MOVE) {
             if (paddle != null) {
                 paddle.setX(x);
             }
