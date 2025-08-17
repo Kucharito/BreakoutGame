@@ -41,7 +41,8 @@
             android:layout_height="wrap_content"
             android:text="Červená"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#FF0000"/>
+            android:backgroundTint="@android:color/holo_red_light"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
             android:id="@+id/paddleBlue"
@@ -49,16 +50,19 @@
             android:layout_height="wrap_content"
             android:text="Modrá"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#0000FF"/>
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
             android:id="@+id/paddleGreen"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Zelená"
-            android:textColor="@color/black"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#00FF00"/>
+            android:textColor="@android:color/black"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:foreground="?attr/selectableItemBackground" />
+
+
 
         <!-- Farba tehličiek -->
         <TextView
@@ -77,7 +81,8 @@
             android:layout_height="wrap_content"
             android:text="Červená"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#FF0000"/>
+            android:backgroundTint="@android:color/holo_red_light"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
             android:id="@+id/brickWhite"
@@ -87,7 +92,8 @@
             android:layout_marginBottom="20dp"
             android:textColor="@color/black"
             android:background="@drawable/black_border"
-            android:backgroundTint="#FFFFFF"/>
+            android:backgroundTint="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <!-- Farba loptičky -->
         <TextView
@@ -106,7 +112,8 @@
             android:layout_height="wrap_content"
             android:text="Červená"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="#FF0000"/>
+            android:backgroundTint="@android:color/holo_red_light"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <Button
             android:id="@+id/ballWhite"
@@ -116,7 +123,8 @@
             android:layout_marginBottom="30dp"
             android:textColor="@color/black"
             android:background="@drawable/black_border"
-            android:backgroundTint="#FFFFFF"/>
+            android:backgroundTint="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <!-- Späť -->
         <Button

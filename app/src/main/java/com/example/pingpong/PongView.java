@@ -152,7 +152,7 @@ public class PongView extends SurfaceView implements Runnable {
             paint.setColor(Color.WHITE);
             paint.setTextSize(50);
             paint.setTextAlign(Paint.Align.LEFT);
-            canvas.drawText("Score "+ score + "Level :"+ level,50,100, paint);
+            canvas.drawText("Score "+ score + " Level :"+ level,50,100, paint);
 
             SharedPreferences sharedPreferences = getContext().getSharedPreferences(OptionsActivity.PREFS_NAME, Context.MODE_PRIVATE);
             String paddleColor = sharedPreferences.getString(OptionsActivity.PADDLE_COLOR_KEY, "white");
@@ -272,7 +272,7 @@ public class PongView extends SurfaceView implements Runnable {
     private void generateBricks(int count, int screenW){
         bricks.clear();
         float brickHeight = 50;
-        float verticalOffset = 150;
+        float verticalOffset = 170;
         //float horizontalOffset = getWidth()/2;
         float brickWidth = screenW / 8;
 

@@ -20,17 +20,21 @@ public class MainMenuActivity extends AppCompatActivity {
         startButton.setOnClickListener(v -> {
             Intent intentStart = new Intent(MainMenuActivity.this, MainActivity.class);
             startActivity(intentStart);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
         optionsButton.setOnClickListener(v -> {
             Intent intentOptions = new Intent(MainMenuActivity.this, OptionsActivity.class);
             startActivity(intentOptions);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
         infoButton.setOnClickListener(v ->{
             Intent intentInfo = new Intent(MainMenuActivity.this, InfoActivity.class);
             startActivity(intentInfo);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
         exitButton.setOnClickListener(v -> {
             finish(); // Close the app
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
     }
 }
