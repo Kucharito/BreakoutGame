@@ -22,12 +22,16 @@ public class PongView extends SurfaceView implements Runnable {
     private int score =0;
     private int level = 1;
     ArrayList<Brick> bricks;
+    boolean isGameOver = false;
+    private int highScore = 0;
 
     public PongView(Context context) {
         // Initialize the PongView, SurfaceHolder, Paint, etc.
         super(context);
         surfaceHolder = getHolder();
         paint = new Paint();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(OptionsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        highScore = sharedPreferences.getInt("high_score", 0);
 
     }
 
@@ -47,9 +51,6 @@ public class PongView extends SurfaceView implements Runnable {
         }
     }
 
-    public void togglePause(){
-        isPaused = !isPaused;
-    }
 
     private void update() {
         if(ball == null || paddle == null) {
@@ -66,10 +67,16 @@ public class PongView extends SurfaceView implements Runnable {
         }
         if (ball.getY() > getHeight()) {
             // Ball is out of bounds, reset position
-            ball.resetPosition();
-            score = 0; // Reset score on miss
-            level = 1; // Reset level on miss
-            generateBricks(8 * level, getWidth()); // Regenerate bricks for new level
+            if (score > highScore){
+                highScore = score;
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences(OptionsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("high_score", highScore);
+                editor.apply();
+            }
+            isGameOver = true; // Set game over state
+            isPaused = true;
+
         }
         // Check for collisions with bricks
         if (bricks != null){
@@ -113,6 +120,18 @@ public class PongView extends SurfaceView implements Runnable {
             float baseSpeed = 1.1f + (level -1)* 0.4f;
             ball.setSpeedBall(baseSpeed*8, -baseSpeed*10);
             generateBricks(5 * level, getWidth()); // Increase number of bricks with level
+        }
+
+        if(ball.getY() > getHeight()){
+            if (score > highScore){
+                highScore = score;
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences(OptionsActivity.PREFS_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("high_score", highScore);
+                editor.apply();
+            }
+            isGameOver = true; // Set game over state
+            isPaused = true;
         }
     }
 
@@ -198,6 +217,31 @@ public class PongView extends SurfaceView implements Runnable {
                 canvas.drawText("Main Menu", centerX, startY + 200, paint);
             }
 
+            if(isGameOver){
+                canvas.drawColor(Color.TRANSPARENT, android.graphics.PorterDuff.Mode.CLEAR);
+                Paint overlayPaint = new Paint();
+                overlayPaint.setColor(Color.argb(150, 0, 0, 0)); // Semi-transparent black
+                canvas.drawRect(0, 0, getWidth(), getHeight(), overlayPaint);
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(100);
+                paint.setTextAlign(Paint.Align.CENTER);
+
+                float centerX = getWidth() / 2;
+                float centerY = getHeight() / 2;
+
+                canvas.drawText("Game Over", centerX, centerY - 500, paint);
+                canvas.drawText("Score: " + score, centerX, centerY-50, paint);
+                canvas.drawText("High Score: " + highScore, centerX, centerY + 100, paint);
+
+                resumeButton = new RectF(centerX - 200, centerY + 200, centerX + 200, centerY + 300);
+                paint.setColor(Color.GRAY);
+                canvas.drawRoundRect(resumeButton, 50, 50, paint);
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(60);
+                canvas.drawText("Restart", centerX, centerY + 270, paint);
+            }
+
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
     }
@@ -244,6 +288,15 @@ public class PongView extends SurfaceView implements Runnable {
         }
     }
 
+    public void restartGame(){
+        score = 0;
+        level=1;
+        ball.resetPosition();
+        generateBricks(8, getWidth()); // Regenerate bricks for the first level
+        isGameOver = false;
+        isPaused = false;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Handle touch events to move the paddle
@@ -273,6 +326,13 @@ public class PongView extends SurfaceView implements Runnable {
             if (paddle != null) {
                 paddle.setX(x);
             }
+        }
+
+        if (isGameOver){
+            if (resumeButton != null && resumeButton.contains(x, y)) {
+                restartGame();
+            }
+            return true;
         }
         return true;
     }
