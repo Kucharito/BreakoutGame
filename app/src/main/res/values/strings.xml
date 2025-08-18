@@ -1,19 +1,40 @@
 <resources>
     <string name="app_name">PingPong</string>
     <string name="info_text">
-        🎮 Breakout – Herný návod\n\n
-        Cieľ hry:\n
-        Odrážaj loptičku pálkou a znič všetky tehličky na obrazovke.
-        Postupne prechádzaj levelmi a získavaj čo najviac bodov.\n\n
-        Ovládanie:\n
-        - Pohyb pálky: potiahni prstom po obrazovke doľava alebo doprava.\n\n
-        Pravidlá:\n
-        - Za zničenie jednej tehličky získavaš 10 bodov.\n
-        - Po odstránení všetkých tehličiek sa posúvaš na ďalší level.\n
-        - Loptička zrýchľuje po niekoľkých odrazoch.\n
-        - Ak loptička spadne dole, strácaš život a rýchlosť loptičky sa zníži.\n\n
-        Tipy:\n
-        - Snaž sa trafiť loptičku rôznymi časťami pálky – môžeš tak zmeniť jej smer.\n
-        - Rýchlejšia loptička ti prinesie viac bodov za menej času, ale je ťažšie ju zachytiť.
+        🎮 Breakout – Game Guide
+        Objective of the game:
+        Bounce the ball with the paddle and destroy all the bricks on the screen.
+        Progress through the levels and score as many points as possible.
+
+        Controls:
+        Move the paddle: swipe your finger left or right across the screen.
+        Rules:
+        Destroying one brick gives you 10 points.
+        After clearing all the bricks, you advance to the next level.
+        The ball speeds up after several bounces.
+        If the ball falls down, you lose a life and the ball’s speed decreases.
+        Tips:
+        Try hitting the ball with different parts of the paddle – this changes its direction.
+        A faster ball lets you score more points in less time, but it’s harder to catch.
     </string>
+    <string name="start">Start</string>
+    <string name="options">Options</string>
+    <string name="info">Info</string>
+    <string name="exit">Exit</string>
+    <string name="game_options">Game Options</string>
+    <string name="paddle_color">Paddle color</string>
+    <string name="ball_color">Ball color</string>
+    <string name="brick_color">Brick color</string>
+    <string name="back">Back</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="white">White</string>
+    <string name="resume">Resume</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="game_over">Game Over</string>
+    <string name="score">Score: </string>
+    <string name="high_score">High Score: </string>
+    <string name="restart">Restart</string>
+
 </resources>

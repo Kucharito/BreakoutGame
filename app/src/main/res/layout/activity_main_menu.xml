@@ -30,28 +30,28 @@
             android:id="@+id/startButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Start" />
+            android:text="@string/start" />
 
         <Button
             android:id="@+id/optionsButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Options" />
+            android:text="@string/options" />
 
         <Button
             android:id="@+id/infoButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Info" />
+            android:text="@string/info" />
 
         <Button
             android:id="@+id/exitButton"
             android:layout_width="200dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
-            android:text="Exit" />
+            android:text="@string/exit" />
 
 
     </LinearLayout>

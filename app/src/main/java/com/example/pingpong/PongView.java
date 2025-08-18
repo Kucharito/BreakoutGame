@@ -212,9 +212,9 @@ public class PongView extends SurfaceView implements Runnable {
 
                 paint.setColor(Color.WHITE);
                 paint.setTextSize(60);
-                canvas.drawText("Resume", centerX, startY+25, paint);
-                canvas.drawText("Exit", centerX, startY + 400, paint);
-                canvas.drawText("Main Menu", centerX, startY + 200, paint);
+                canvas.drawText(getContext().getString(R.string.resume), centerX, startY+25, paint);
+                canvas.drawText(getContext().getString(R.string.exit), centerX, startY + 400, paint);
+                canvas.drawText(getContext().getString(R.string.main_menu), centerX, startY + 200, paint);
             }
 
             if(isGameOver){
@@ -230,16 +230,16 @@ public class PongView extends SurfaceView implements Runnable {
                 float centerX = getWidth() / 2;
                 float centerY = getHeight() / 2;
 
-                canvas.drawText("Game Over", centerX, centerY - 500, paint);
-                canvas.drawText("Score: " + score, centerX, centerY-50, paint);
-                canvas.drawText("High Score: " + highScore, centerX, centerY + 100, paint);
+                canvas.drawText(getContext().getString(R.string.game_over), centerX, centerY - 500, paint);
+                canvas.drawText(getContext().getString(R.string.score) + score, centerX, centerY-50, paint);
+                canvas.drawText(getContext().getString(R.string.high_score) + highScore, centerX, centerY + 100, paint);
 
                 resumeButton = new RectF(centerX - 200, centerY + 200, centerX + 200, centerY + 300);
                 paint.setColor(Color.GRAY);
                 canvas.drawRoundRect(resumeButton, 50, 50, paint);
                 paint.setColor(Color.WHITE);
                 paint.setTextSize(60);
-                canvas.drawText("Restart", centerX, centerY + 270, paint);
+                canvas.drawText(getContext().getString(R.string.restart), centerX, centerY + 270, paint);
             }
 
             surfaceHolder.unlockCanvasAndPost(canvas);

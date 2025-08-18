@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">PingPong</string>
+    <string name="info_text">
+        🎮 Breakout – Herný návod\n\n
+        Cieľ hry:\n
+        Odrážaj loptičku pálkou a znič všetky tehličky na obrazovke.
+        Postupne prechádzaj levelmi a získavaj čo najviac bodov.\n\n
+        Ovládanie:\n
+        - Pohyb pálky: potiahni prstom po obrazovke doľava alebo doprava.\n\n
+        Pravidlá:\n
+        - Za zničenie jednej tehličky získavaš 10 bodov.\n
+        - Po odstránení všetkých tehličiek sa posúvaš na ďalší level.\n
+        - Loptička zrýchľuje po niekoľkých odrazoch.\n
+        - Ak loptička spadne dole, strácaš život a rýchlosť loptičky sa zníži.\n\n
+        Tipy:\n
+        - Snaž sa trafiť loptičku rôznymi časťami pálky – môžeš tak zmeniť jej smer.\n
+        - Rýchlejšia loptička ti prinesie viac bodov za menej času, ale je ťažšie ju zachytiť.
+    </string>
+    <string name="start">Štart</string>
+    <string name="options">Nastavenia</string>
+    <string name="info">Info</string>
+    <string name="exit">Ukončiť</string>
+    <string name="game_options">Nastavenia hry</string>
+    <string name="paddle_color">Farba pálky</string>
+    <string name="ball_color">Farba loptičky</string>
+    <string name="brick_color">Farba tehličiek</string>
+    <string name="back">Späť</string>
+    <string name="red">Červená</string>
+    <string name="blue">Modrá</string>
+    <string name="green">Zelená</string>
+    <string name="white">Biela</string>
+    <string name="resume">Pokračovať</string>
+    <string name="main_menu">Hlavné menu</string>
+    <string name="game_over">Koniec hry</string>
+    <string name="score">Skóre: </string>
+    <string name="high_score">Najvyššie skóre: </string>
+    <string name="restart">Reštart</string>
+</resources>
